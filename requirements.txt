@@ -1,0 +1,4 @@
+Flask-Mail
+Flask
+Flask-CORS
+pywebview

@@ -28,3 +28,35 @@ p {
 }
 
 /* Add your custom styles below this line */
+.site-title {
+    font-family: Helvetica, sans-serif;
+    text-align: center;
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.site-description {
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+button {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    padding: 5px 15px;
+    font-size: 16px;
+    font-weight: bold;
+    border: 1px solid #333;
+    border-radius: 15px;
+    background-color: #005aab;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #0077cc;
+    transform: scale(1.1);
+}

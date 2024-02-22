@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="../static/style.css">
-</head>
-<body>
-    <h1>Hello from Flask and Pywebview!</h1>
-    <a href="about">Clique aqui para saber mais!</a>
-</body>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <h1 class="site-title">SedBR</h1>
+    <p class="site-description">
+      Este programa serve para plotagem de arquivos de poços
+    </p>
+    <br />
+    <input type="file" id="fileInput" style="display: none" />
+    <button id="btnOpen" class="btn-open">Abrir arquivo de poço</button>
+    <button class="btn-desc">Descrição</button>
+    <button class="btn-plot">Gráficos</button>
+
+    <script src="../static/index.js"></script>
+  </body>
 </html>
