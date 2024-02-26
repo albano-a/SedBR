@@ -42,6 +42,37 @@ p {
     margin-bottom: 20px;
 }
 
+.container {
+    width: 600px;
+    margin: 0 auto;
+    border-radius: 15px;
+}
+
+/* Remove the dots from the list */
+#well-list {
+    list-style-type: none;
+}
+
+/* Add hover effects to the list items */
+.well-item {
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.well-item:hover {
+    background-color: #0077cc;
+    color: #f6f6f6;
+}
+
+.container-upload {
+    display: flex;
+    justify-content: center;
+    border: 1px solid #333;
+}
+
 form {
     display: flex;
     flex-direction: column;
@@ -63,6 +94,41 @@ button, .input-btn {
     color: #fff;
     cursor: pointer;
     transition: 0.2s ease-in-out;
+}
+
+.well-item-selected {
+    background-color: #0077cc;
+    color: #f6f6f6;
+    font-weight: bold;
+}
+
+#add-well {
+    border: 1px solid #333;
+    border-radius: 15px;
+    background-color: #28ab00;
+}
+#refresh-page {
+    border: 1px solid #333;
+    border-radius: 15px;
+    background-color: #007bab;
+
+}
+#return-index {
+    border: 1px solid #333;
+    border-radius: 15px;
+    background-color: #005aab;
+}
+
+#remove-well {
+    border: 1px solid #333;
+    border-radius: 15px;
+    background-color: #ab0000;
+}
+
+#rename-well {
+    border: 1px solid #333;
+    border-radius: 15px;
+    background-color: #9c9c9c;
 }
 
 button .rm-link {

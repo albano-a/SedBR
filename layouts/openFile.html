@@ -6,44 +6,52 @@
     <title>Document</title>
     <link rel="stylesheet" href="../static/style.css" />
   </head>
-  <body>
+  <div class="container">
     <h1 class="site-title">SedBR</h1>
     <h2 class="page-name">Abrir arquivo de Poço</h2>
 
     <form id="configForm">
-        <label for="filePath">Caminho do arquivo:</label>
-        <input type="file" id="filePath" name="filePath">
-        <br>
-        <label for="fileType">Tipo de arquivo:</label>
-        <select id="fileType" name="fileType">
-            <option value="txt">.txt</option>
-            <option value="csv">.csv</option>
-            <option value="xlsx">.xlsx</option>
-            <option value="las">.las</option>
-            <!-- Add more options as needed -->
-        </select>
-        <br>
-        <input class="input-btn" type="submit" value="Salvar configurações">
+      <label for="filePath">Caminho do arquivo:</label>
+      <input type="file" id="filePath" name="filePath" />
+      <br />
+      <input class="input-btn" type="submit" value="Salvar configurações" />
     </form>
     <h1 id="confirmation-message"></h1>
+    <div style="text-align: center;">
+        <a href="/">Retornar a página inicial</a>
+    </div>
+  </div>
     <script>
-        document.getElementById('configForm').addEventListener('submit', function(event) {
-            // Prevent the form from being submitted normally
-            event.preventDefault();
+      document
+        .getElementById("configForm")
+        .addEventListener("submit", function (event) {
+          // Prevent the form from being submitted normally
+          event.preventDefault();
 
-            // Get the values of the input fields
-            var filePath = document.getElementById('filePath').value;
-            var fileType = document.getElementById('fileType').value;
+          // Create a FormData object
+          var formData = new FormData();
 
-            // Save the values
-            localStorage.setItem('filePath', filePath);
-            localStorage.setItem('fileType', fileType);
+          // Append the file to the FormData object
+          formData.append(
+            "file",
+            document.getElementById("filePath").files[0]
+          );
 
-            // Optionally, you can display a message to the user
-            document.getElementById('confirmation-message').textContent = 'Arquivo importado e salvo.';
+          // Send a POST request to the /upload route
+          fetch("/upload", {
+            method: "POST",
+            body: formData,
+          })
+            .then((response) => response.text())
+            .then((data) => {
+            // Display the response from the server
+            document.getElementById("confirmation-message").textContent = data;
+            // Redirect to index.html after 3 seconds
+            setTimeout(function() {
+                window.location.href = '/';
+            }, 1500);
 
-            // Redirect to index.html
-            window.location.href = 'index.html';
+            });
         });
     </script>
     <script src="../static/index.js"></script>
