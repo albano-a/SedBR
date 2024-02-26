@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <h1 class="site-title">SedBR</h1>
+    <h2 class="page-name">Abrir arquivo de Poço</h2>
+
+    <form id="configForm">
+        <label for="filePath">Caminho do arquivo:</label>
+        <input type="file" id="filePath" name="filePath">
+        <br>
+        <label for="fileType">Tipo de arquivo:</label>
+        <select id="fileType" name="fileType">
+            <option value="txt">.txt</option>
+            <option value="csv">.csv</option>
+            <option value="xlsx">.xlsx</option>
+            <option value="las">.las</option>
+            <!-- Add more options as needed -->
+        </select>
+        <br>
+        <input class="input-btn" type="submit" value="Salvar configurações">
+    </form>
+    <h1 id="confirmation-message"></h1>
+    <script>
+        document.getElementById('configForm').addEventListener('submit', function(event) {
+            // Prevent the form from being submitted normally
+            event.preventDefault();
+
+            // Get the values of the input fields
+            var filePath = document.getElementById('filePath').value;
+            var fileType = document.getElementById('fileType').value;
+
+            // Save the values
+            localStorage.setItem('filePath', filePath);
+            localStorage.setItem('fileType', fileType);
+
+            // Optionally, you can display a message to the user
+            document.getElementById('confirmation-message').textContent = 'Arquivo importado e salvo.';
+
+            // Redirect to index.html
+            window.location.href = 'index.html';
+        });
+    </script>
+    <script src="../static/index.js"></script>
+  </body>
+</html>

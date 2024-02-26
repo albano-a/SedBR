@@ -17,10 +17,11 @@ body {
     background-color: #fff;
 }
 
-h1 {
+h1, h2 {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 20px;
+    text-align: center;
 }
 
 p {
@@ -35,13 +36,21 @@ p {
     margin-bottom: 20px;
 }
 
-.site-description {
+.site-description, .page-name {
     text-align: center;
     font-size: 20px;
     margin-bottom: 20px;
 }
 
-button {
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+
+}
+
+button, .input-btn {
     display: block;
     margin: 0 auto;
     margin-bottom: 10px;
@@ -54,6 +63,11 @@ button {
     color: #fff;
     cursor: pointer;
     transition: 0.2s ease-in-out;
+}
+
+button .rm-link {
+    text-decoration: none;
+    color: inherit;
 }
 
 button:hover {
