@@ -124,7 +124,7 @@ def map_lithology_to_granulometry(x, y=np.nan):
     else:
         return 0
 
-def data(fname):
+def processed_data(fname):
     """
     This function reads data from an Excel, CSV or TXT file and processes it.
 
@@ -253,7 +253,7 @@ def process_geo_data():
         contains the dominant lithology and its granulometry for each depth level.
     """
     # Get data from data function
-    prof, lit, perc, granu = data()
+    prof, lit, perc, granu = processed_data()
 
     # Calculate intervals
     d = intervalo(prof)

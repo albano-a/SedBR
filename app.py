@@ -1,9 +1,12 @@
 import os
+import pandas as pd
 from flask import Flask, render_template, request, jsonify
 from flask_cors import CORS
 from litologias import *
 
-
+def csv_to_html():
+    df = pd.read_csv('upload/poco_teste.csv', sep=';')
+    return df.to_html(classes='table table-striped')
 
 app = Flask(__name__, template_folder='layouts')
 CORS(app)
@@ -11,6 +14,11 @@ CORS(app)
 @app.route('/')
 def index():
     return render_template('index.html')
+
+@app.route('/show')
+def home():
+    table = csv_to_html()
+    return render_template('show.html', table=table)
 
 @app.route('/openFile')
 def openFile():
