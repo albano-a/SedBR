@@ -103,29 +103,34 @@ button, .input-btn {
 }
 
 #add-well {
+    width: 150px;
     border: 1px solid #333;
     border-radius: 15px;
     background-color: #28ab00;
 }
 #refresh-page {
+    width: 150px;
     border: 1px solid #333;
     border-radius: 15px;
     background-color: #007bab;
 
 }
 #return-index {
+    width: 150px;
     border: 1px solid #333;
     border-radius: 15px;
     background-color: #005aab;
 }
 
 #remove-well {
+    width: 150px;
     border: 1px solid #333;
     border-radius: 15px;
     background-color: #ab0000;
 }
 
 #rename-well {
+    width: 150px;
     border: 1px solid #333;
     border-radius: 15px;
     background-color: #9c9c9c;
