@@ -44,8 +44,6 @@ def get_wells():
     files = os.listdir('./upload')
     return render_template('uploaded_wells.html', wells=files)
 
-
-
 # a route that opens a python file with dictionaries
 @app.route('/litologias')
 def litologias():
