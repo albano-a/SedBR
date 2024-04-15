@@ -1,7 +1,3 @@
 numpy
 pandas
 matplotlib
-Flask-Mail
-Flask
-Flask-CORS
-pywebview

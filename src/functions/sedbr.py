@@ -5,7 +5,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import copy
 import json
-from litologias import *
+from src.dictionaries.litologias import *
 
 
 def abrir_paleta():
