@@ -11,6 +11,7 @@ from src.dictionaries.litologias import *
 def abrir_paleta():
     return lithologies_name, lithologies_num
 
+
 def intervalo(prof):
     """
     This function calculates the spacing between samples.
@@ -18,7 +19,7 @@ def intervalo(prof):
     where the keys are the unique sample depths and the values are the spacings.
     """
     # Convert the list of sample depths to a DataFrame for easier manipulation
-    sample_depths_df = pd.DataFrame(prof, columns=['prof'])
+    sample_depths_df = pd.DataFrame(prof, columns=["prof"])
 
     # Initialize variables
     unique_depths = []
@@ -44,6 +45,7 @@ def intervalo(prof):
 
     return depth_spacing_dict
 
+
 def porcentagem(porcentagem):
     """
     This function validates a percentage value.
@@ -62,6 +64,7 @@ def porcentagem(porcentagem):
         return int(porcentagem)
     else:
         return 0
+
 
 def validate_lithology_mnemonic(mnemonico):
     """
@@ -87,7 +90,8 @@ def validate_lithology_mnemonic(mnemonico):
     if mnemonico.upper() in lithologies_name.keys():
         return mnemonico.upper()
     else:
-        print("mnemonico não identificado:",mnemonico)
+        print("mnemonico não identificado:", mnemonico)
+
 
 def map_lithology_to_granulometry(x, y=np.nan):
     """
@@ -102,27 +106,65 @@ def map_lithology_to_granulometry(x, y=np.nan):
         float: The corresponding granulometry value.
     """
     granulometry_map = {
-        'AND': 0, 'BAS': 0, 'ARS': 0, 'CRN': 0, 'CRV': 0, 'CHT': 0, 'CIM': 0,
-        'DIA': 0, 'GIP': 0, 'GNA': 0, 'GRN': 0, 'HAL': 0, 'INI': 0, 'IGB': 0,
-        'MSD': 0, 'SNI': 0, 'SLX': 0, 'TQD': 0, 'CLC': 0,
-        'CAL': 1.5,
-        'GRS': 5, 'CRE': 5,
-        'PKS': 4,
-        'MDS': 2,
-        'WKS': 3,
-        'ARG': 1, 'AGT': 1, 'AGN': 1, 'AGL': 1, 'AGC': 1, 'AGB': 1, 'CLU': 1,
-        'FLH': 1, 'MRG': 1, 'ESF': 1, 'LMT': 1,
-        'AGS': 2, 'CSI': 2, 'FLS': 2, 'SLT': 2,
-        'ARO': 5.5, 'CRU': 5.5, 'CGL': 5.5, 'COQ': 5.5, 'DMT': 5.5, 'BRC': 5.5, 'BRV': 5.5, 'BLT': 5.5, 'CRU': 5.5
+        "AND": 0,
+        "BAS": 0,
+        "ARS": 0,
+        "CRN": 0,
+        "CRV": 0,
+        "CHT": 0,
+        "CIM": 0,
+        "DIA": 0,
+        "GIP": 0,
+        "GNA": 0,
+        "GRN": 0,
+        "HAL": 0,
+        "INI": 0,
+        "IGB": 0,
+        "MSD": 0,
+        "SNI": 0,
+        "SLX": 0,
+        "TQD": 0,
+        "CLC": 0,
+        "CAL": 1.5,
+        "GRS": 5,
+        "CRE": 5,
+        "PKS": 4,
+        "MDS": 2,
+        "WKS": 3,
+        "ARG": 1,
+        "AGT": 1,
+        "AGN": 1,
+        "AGL": 1,
+        "AGC": 1,
+        "AGB": 1,
+        "CLU": 1,
+        "FLH": 1,
+        "MRG": 1,
+        "ESF": 1,
+        "LMT": 1,
+        "AGS": 2,
+        "CSI": 2,
+        "FLS": 2,
+        "SLT": 2,
+        "ARO": 5.5,
+        "CRU": 5.5,
+        "CGL": 5.5,
+        "COQ": 5.5,
+        "DMT": 5.5,
+        "BRC": 5.5,
+        "BRV": 5.5,
+        "BLT": 5.5,
+        "CRU": 5.5,
     }
 
     if x in granulometry_map:
         return granulometry_map[x]
-    elif x in ['ARL', 'ARC', 'ARF', 'ART', 'ARE', 'ARN']:
-        y_map = {'MFN': 2.5, 'FNO': 3, 'MED': 3.5, 'GRO': 4, 'MGR': 4.5, 'CGO': 5}
+    elif x in ["ARL", "ARC", "ARF", "ART", "ARE", "ARN"]:
+        y_map = {"MFN": 2.5, "FNO": 3, "MED": 3.5, "GRO": 4, "MGR": 4.5, "CGO": 5}
         return y_map.get(y, 3.5)
     else:
         return 0
+
 
 def processed_data(fname):
     """
@@ -149,25 +191,35 @@ def processed_data(fname):
     file_extension = file_extension.lower()
 
     # Read the file based on its type
-    if file_extension == '.xlsx':
+    if file_extension == ".xlsx":
         data = pd.read_excel(fname)
-    elif file_extension in ['.csv', '.txt']:
+    elif file_extension in [".csv", ".txt"]:
         data = pd.read_csv(fname)
     else:
-        raise ValueError(f'Unsupported file type: {file_extension}')
+        raise ValueError(f"Unsupported file type: {file_extension}")
 
     # Process the data
-    data = pd.DataFrame(np.array([data[data.columns[0]], data[data.columns[1]], data[data.columns[2]], data[data.columns[3]]]).T)
+    data = pd.DataFrame(
+        np.array(
+            [
+                data[data.columns[0]],
+                data[data.columns[1]],
+                data[data.columns[2]],
+                data[data.columns[3]],
+            ]
+        ).T
+    )
     data.columns = ["PROF", "LITO", "%", "GRAN"]
     Prof = np.array(data.PROF)
     for i in range(len(Prof)):
         if np.isnan(Prof[i]) != True:
             pass
         else:
-            while (np.isnan(Prof[i]) == True):
+            while np.isnan(Prof[i]) == True:
                 Prof[i] = Prof[i - 1]
 
-    return Prof, data.LITO, data['%'], data.GRAN
+    return Prof, data.LITO, data["%"], data.GRAN
+
 
 def sort_lithology_by_type(list_of_lists):
     """
@@ -182,17 +234,42 @@ def sort_lithology_by_type(list_of_lists):
         list: The input list 'a', sorted based on the appended numerical values.
     """
     lithology_map = {
-        'AGT': 1, 'AGC': 1, 'AGL': 1, 'AGB': 1, 'ARG': 1,  # Argilas
-        'FLH': 2, 'FLS': 2, 'MRG': 2, 'TOL': 2,  # Folhelhos
-        'SLT': 3, 'AGS': 3, 'TOS': 3,  # siltes
-        'ARN': 4, 'ARE': 4, 'ARL': 4, 'ARF': 4, 'ART': 4, 'ARC': 4,  # areias
-        'CGL': 5, 'ARO': 5, 'BRC': 5, 'DMT': 5,
-        'CAL': 6, 'CLC': 6, 'CHT': 6, 'DOL': 6,  # calcario
-        'CLU': 7, 'MDS': 7,  # Cal argilitO
-        'WKS': 7.5,
-        'CSI': 8, 'PKS': 8,  # Cal siltito
-        'CRE': 9, 'GRS': 9,  # Cal arenito
-        'CRU': 10, 'COQ': 10, 'BLT': 10  # Cal rudito
+        "AGT": 1,
+        "AGC": 1,
+        "AGL": 1,
+        "AGB": 1,
+        "ARG": 1,  # Argilas
+        "FLH": 2,
+        "FLS": 2,
+        "MRG": 2,
+        "TOL": 2,  # Folhelhos
+        "SLT": 3,
+        "AGS": 3,
+        "TOS": 3,  # siltes
+        "ARN": 4,
+        "ARE": 4,
+        "ARL": 4,
+        "ARF": 4,
+        "ART": 4,
+        "ARC": 4,  # areias
+        "CGL": 5,
+        "ARO": 5,
+        "BRC": 5,
+        "DMT": 5,
+        "CAL": 6,
+        "CLC": 6,
+        "CHT": 6,
+        "DOL": 6,  # calcario
+        "CLU": 7,
+        "MDS": 7,  # Cal argilitO
+        "WKS": 7.5,
+        "CSI": 8,
+        "PKS": 8,  # Cal siltito
+        "CRE": 9,
+        "GRS": 9,  # Cal arenito
+        "CRU": 10,
+        "COQ": 10,
+        "BLT": 10,  # Cal rudito
     }
 
     for sublist in list_of_lists:
@@ -201,6 +278,7 @@ def sort_lithology_by_type(list_of_lists):
     list_of_lists.sort(key=lambda x: x[-1])
 
     return list_of_lists
+
 
 def sum_lithology_percentages(lithology_list):
     """
@@ -225,11 +303,14 @@ def sum_lithology_percentages(lithology_list):
         for j in range(len(lithology_list)):
             if i != j and current_lithology == lithology_list[j][0]:
                 # If two lithologies are the same, add their percentages together
-                lithology_list[j][1] = int(lithology_list[i][1]) + int(lithology_list[j][1])
+                lithology_list[j][1] = int(lithology_list[i][1]) + int(
+                    lithology_list[j][1]
+                )
                 # Set the percentage of the first lithology to 0
                 lithology_list[i][1] = 0
 
     return lithology_list
+
 
 def process_geo_data():
     """
@@ -259,11 +340,15 @@ def process_geo_data():
     d = intervalo(prof)
 
     # Initialize dictionaries
-    l = {prof[0]: {
-        "Lito": [[validate_lithology_mnemonic(lit[0]), porcentagem(perc[0])]],
-        "Espacamento": d[prof[0]],
-        "Granulometria": map_lithology_to_granulometry(validate_lithology_mnemonic(lit[0]), granu[0])
-    }}
+    l = {
+        prof[0]: {
+            "Lito": [[validate_lithology_mnemonic(lit[0]), porcentagem(perc[0])]],
+            "Espacamento": d[prof[0]],
+            "Granulometria": map_lithology_to_granulometry(
+                validate_lithology_mnemonic(lit[0]), granu[0]
+            ),
+        }
+    }
     gnm = {}
 
     # Initialize lithology list
@@ -274,24 +359,37 @@ def process_geo_data():
         # If depth level already exists in dictionary
         if prof[i] in l:
             # If depth level is the same as previous
-            if prof[i] == prof[i-1]:
+            if prof[i] == prof[i - 1]:
                 # Append lithology to list
-                l[prof[i]]["Lito"].append([validate_lithology_mnemonic(lit[i]), porcentagem(perc[i])])
-                g.append([validate_lithology_mnemonic(lit[i]), porcentagem(perc[i]), granu[i]])
+                l[prof[i]]["Lito"].append(
+                    [validate_lithology_mnemonic(lit[i]), porcentagem(perc[i])]
+                )
+                g.append(
+                    [
+                        validate_lithology_mnemonic(lit[i]),
+                        porcentagem(perc[i]),
+                        granu[i],
+                    ]
+                )
         else:
             # Sum percentages of similar lithologies
             g = sum_lithology_percentages(g)
             # Sort lithologies by percentage in descending order
             g.sort(key=lambda x: int(x[1]), reverse=True)
             # Add dominant lithology and its granulometry to dictionary
-            gnm[prof[i-1]] = [g[0][0], map_lithology_to_granulometry(g[0][0], g[0][2])]
+            gnm[prof[i - 1]] = [
+                g[0][0],
+                map_lithology_to_granulometry(g[0][0], g[0][2]),
+            ]
             # Reset lithology list
             g = [[validate_lithology_mnemonic(lit[i]), porcentagem(perc[i]), granu[i]]]
             # Add new depth level to dictionary
             l[prof[i]] = {
                 "Lito": [[validate_lithology_mnemonic(lit[i]), porcentagem(perc[i])]],
                 "Espacamento": d[prof[i]],
-                "Granulometria": map_lithology_to_granulometry(validate_lithology_mnemonic(lit[i]), granu[i])
+                "Granulometria": map_lithology_to_granulometry(
+                    validate_lithology_mnemonic(lit[i]), granu[i]
+                ),
             }
 
     # Process the last depth level
@@ -301,6 +399,7 @@ def process_geo_data():
 
     # Return dictionaries
     return l, gnm
+
 
 def convert_depth_lithology_granulometry_to_arrays(gnm):
     """
@@ -336,6 +435,7 @@ def convert_depth_lithology_granulometry_to_arrays(gnm):
     # Convert lists to numpy arrays and return
     return np.array(pf), np.array(litg), np.array(gran)
 
+
 def process_geological_data_arrays(depth, granulo, lithology):
     """
     This function processes three input arrays and returns three output arrays.
@@ -364,7 +464,7 @@ def process_geological_data_arrays(depth, granulo, lithology):
     for i in range(len(depth) - 1):
         if i == 0:
             # For the first depth value, append two values to each output array
-            prof_out.extend([depth[i+1] - (depth[i+1] - depth[i]), depth[i]])
+            prof_out.extend([depth[i + 1] - (depth[i + 1] - depth[i]), depth[i]])
             gran_out.extend([granulo[i], granulo[i]])
             lith_out.extend([lithology[i], lithology[i]])
         else:
